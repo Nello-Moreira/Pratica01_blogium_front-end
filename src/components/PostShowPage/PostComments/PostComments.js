@@ -13,20 +13,6 @@ export default function PostComments({ postId }) {
 		getPostComments(postId)
 			.then(response => setComments(response.data))
 			.catch(error => console.error(error));
-		/* setComments([
-			{
-				id: 1,
-				postId: postId,
-				author: 'João',
-				content: 'Muito bom esse post! Tá de parabéns',
-			},
-			{
-				id: 2,
-				postId: postId,
-				author: 'Maria',
-				content: 'Como faz pra dar palmas?',
-			},
-		]); */
 	}, [postId]);
 
 	return (
@@ -35,7 +21,11 @@ export default function PostComments({ postId }) {
 			{comments.length > 0
 				? comments.map(c => <Comment comment={c} key={c.id} />)
 				: 'No comments yet. Be the first to comment!'}
-			<AddComment postId={postId} />
+			<AddComment
+				postId={postId}
+				comments={comments}
+				setComments={setComments}
+			/>
 		</Container>
 	);
 }
